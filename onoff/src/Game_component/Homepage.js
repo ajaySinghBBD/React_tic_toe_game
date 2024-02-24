@@ -9,8 +9,12 @@ const RepeatedComponent = ({ id, onClick, valuepassing }) => {
 
     return (
         <>
-            <div>
-                <button onClick={onClick} style={valuepassing[id]==='X'? {backgroundColor:"violet", border:"none", padding:"3px 8px",textAlign:"center",textDecoration:"none",display:"inline-block",fontSize:"10px"} :{backgroundColor:"pink"} }>{valuepassing[id]}</button>
+            {/* <div style={{padding:"2px"}}>
+                <button onClick={onClick} style={valuepassing[id]==='X'? {backgroundColor:"darkkhaki", padding:"2px 2px 2px 2px"} :{backgroundColor:"pink"} }>{valuepassing[id]}</button>
+            </div> */}
+
+            <div >
+                <button onClick={onClick} style={{backgroundColor:valuepassing[id]==='X'? "darkkhaki": "darkmagenta", padding:"10px 10px 10px 10px", fontSize:"", width:"50px", height:"50px", overflow:"hidden"} }>{valuepassing[id]}</button>
             </div>
         </>
     )
@@ -31,7 +35,7 @@ const Homepage = () => {
 
   
     const onhandleclick = (index) => {
-        const symbol= chance%2 === 0 ?'X' :'o';
+        const symbol= chance%2 === 0 ?'X' :'O';
         setValue(symbol)
         setChance(pre => pre + 1);
 
@@ -49,11 +53,11 @@ const Homepage = () => {
 
 
         // } else {
-        //     setValue('o')
+        //     setValue('O')
         //     setChance(pre => pre + 1);
 
         //     const newDisplay = [...display];
-        //     newDisplay[index] = 'o';
+        //     newDisplay[index] = 'O';
         //     setDisplay(newDisplay);
 
         // }
@@ -63,6 +67,7 @@ const Homepage = () => {
     const WinLogic = () => {
         setTimeout(() => {
             console.log("winlogic", display);
+            let flag=0;
     
             if (
                 (display[0] === 'X' && display[1] === 'X' && display[2] === 'X') ||
@@ -77,21 +82,31 @@ const Homepage = () => {
                 console.log("Ajay");
                 alert("Ajay Wins");
                 setDisplay([null])
+                setChance(0);
+                flag=1;
             }
     
             if (
-                (display[0] === 'o' && display[1] === 'o' && display[2] === 'o') ||
-                (display[3] === 'o' && display[4] === 'o' && display[5] === 'o') ||
-                (display[6] === 'o' && display[7] === 'o' && display[8] === 'o') ||
-                (display[6] === 'o' && display[4] === 'o' && display[2] === 'o') ||
-                (display[0] === 'o' && display[4] === 'o' && display[8] === 'o') ||
-                (display[1] === 'o' && display[4] === 'o' && display[7] === 'o') ||
-                (display[0] === 'o' && display[3] === 'o' && display[6] === 'o') ||
-                (display[2] === 'o' && display[5] === 'o' && display[8] === 'o')
+                (display[0] === 'O' && display[1] === 'O' && display[2] === 'O') ||
+                (display[3] === 'O' && display[4] === 'O' && display[5] === 'O') ||
+                (display[6] === 'O' && display[7] === 'O' && display[8] === 'O') ||
+                (display[6] === 'O' && display[4] === 'O' && display[2] === 'O') ||
+                (display[0] === 'O' && display[4] === 'O' && display[8] === 'O') ||
+                (display[1] === 'O' && display[4] === 'O' && display[7] === 'O') ||
+                (display[0] === 'O' && display[3] === 'O' && display[6] === 'O') ||
+                (display[2] === 'O' && display[5] === 'O' && display[8] === 'O')
             ) {
                 console.log("vinayak");
                 alert("vinayak Wins");
                 setDisplay([null])
+                setChance(0);
+                flag=1;
+            }
+
+            if(flag===0 && chance===9){
+                alert("Match Draw.Let's play one more ");
+                setDisplay([null])
+
             }
         }, 0);
     };
@@ -105,7 +120,7 @@ const Homepage = () => {
 
     return (
         <>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex"}}>
 
 
                 <div>
