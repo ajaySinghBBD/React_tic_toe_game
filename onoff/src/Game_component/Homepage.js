@@ -1,4 +1,5 @@
 import React, { useEffect, useState , useLayoutEffect} from "react";
+import { Container,Container1 } from "../Component/styles/Container.styled";
 
 
 
@@ -117,30 +118,81 @@ const Homepage = () => {
         WinLogic();
     }, [chance])
 
+    const renderRepeatedComponent=()=>{
+        let indexValue = 0;
+        const component = [];
+        for(let key=0; key < 3; key++){
+            let insideComponet=[];
+            for(let insideKey=0; insideKey <3; insideKey++)
+            {
+                console.log(indexValue);
+                insideComponet.push(
+                    <RepeatedComponent 
+                        id={indexValue}
+                         onClick={() => onhandleclick(indexValue)} 
+                         valuepassing={display} />
+                )
+                indexValue++;
+               
+            }
+
+            component.push(insideComponet)
+
+           
+        }
+        return component;
+    };
 
     return (
         <>
-            <div style={{ display: "flex"}}>
+            {/* <div style={{ display: "flex"}}> */}
 
+            
+            <Container>
+      {renderRepeatedComponent().map((value, index) => (
+        <Container1 key={index}>
+          {value.map((innerValue, innerIndex) => (
+            <div key={innerIndex}>
+              {innerValue}
+            </div>
+          ))}
+        </Container1>
+      ))}
+    </Container>
+            {/* <Container>
+                    {
+                        renderRepeatedComponent().map((value, index)=>{
+                              <Container1>  {value.map((innerValue,innerIndex)=>{
+                                   {innerValue}
+                                })}
+                               </Container1>
+                        })
+                    } */}
 
-                <div>
+                {/* <Container1>
                     <RepeatedComponent id={0} onClick={() => onhandleclick(0)} valuepassing={display} />
                     <RepeatedComponent id={1} onClick={() => onhandleclick(1)} valuepassing={display} />
                     <RepeatedComponent id={2} onClick={() => onhandleclick(2)} valuepassing={display} />
-                </div>
-                <div>
+                </Container1>
+                <Container1>
                     <RepeatedComponent id={3} onClick={() => onhandleclick(3)} valuepassing={display} />
                     <RepeatedComponent id={4} onClick={() => onhandleclick(4)} valuepassing={display} />
                     <RepeatedComponent id={5} onClick={() => onhandleclick(5)} valuepassing={display} />
-                </div>
-                <div>
+                </Container1>
+                <Container1>
                     <RepeatedComponent id={6} onClick={() => onhandleclick(6)} valuepassing={display} />
                     <RepeatedComponent id={7} onClick={() => onhandleclick(7)} valuepassing={display} />
                     <RepeatedComponent id={8} onClick={() => onhandleclick(8)} valuepassing={display} />
-                </div>
-            </div>
+                </Container1> */}
+            {/* </Container> */}
 
-
+                {/* {renderRepeatedComponent().map((component, index) => (
+                        // <div key={index}><>{component}</></div>
+                        <Container>{component}</Container>
+                    ))} */}
+            
+          
+            
 
 
         </>
